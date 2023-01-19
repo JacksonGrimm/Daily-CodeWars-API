@@ -60,7 +60,7 @@ const startScrape = async () => {
     }
   );
   console.log("wrote file");
-  for (let i = 0; 14 > i; i++) {
+  for (let i = 0; 3 > i; i++) {
     ids = await scrapeCodeWars();
     console.log(ids);
     storeID(ids);
