@@ -1,6 +1,8 @@
 const router = require("express").Router();
 const axios = require("axios");
-const { getOneID } = require("../utils/webScrapper");
+const { getOneID, startScrape } = require("../utils/webScrapper");
+const dotenv = require("dotenv");
+dotenv.config();
 
 router.get("/getDailyChallenge", async (req, res) => {
   const getFromCodeWars = async (ID) => {
@@ -16,6 +18,10 @@ router.get("/getDailyChallenge", async (req, res) => {
   };
   ID = await getOneID();
   getFromCodeWars(ID);
+});
+
+router.get(`/getDailyChallenge/${process.env.PASS}`, async (req, res) => {
+  await startScrape();
 });
 
 module.exports = router;

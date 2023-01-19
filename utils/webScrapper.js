@@ -51,7 +51,7 @@ const storeID = async (newIDs) => {
   };
 };
 const startScrape = async () => {
-  fs.writeFile(
+  const data = fs.promises.writeFile(
     path.join(__dirname, "/data/codeWarsIDs.json"),
     "[]",
     function (err) {
@@ -59,6 +59,7 @@ const startScrape = async () => {
       console.log("Saved!");
     }
   );
+  console.log("wrote file");
   for (let i = 0; 14 > i; i++) {
     ids = await scrapeCodeWars();
     console.log(ids);
@@ -67,29 +68,34 @@ const startScrape = async () => {
 };
 
 const removeID = async () => {
-  let data = await fs.promises.readFile(
-    path.join(__dirname, "/data/codeWarsIDs.json"),
-    "utf8",
-    (error, data) => {
-      return error ? console.log(error) : fileData(data);
-    }
-  );
-  //parses fileData
-  data = JSON.parse(data);
-  //sets new data to the array value of file data
-  const singleID = data.pop();
-  //writes over data with new data
-  data = JSON.stringify(data);
-  fs.writeFile(
-    path.join(__dirname, "/data/codeWarsIDs.json"),
-    data,
-    function (err) {
-      if (err) throw err;
-      console.log("Saved!");
-    }
-  );
-  console.log(singleID);
-  return singleID;
+  try {
+    let data = await fs.promises.readFile(
+      path.join(__dirname, "/data/codeWarsIDs.json"),
+      "utf8",
+      (error, data) => {
+        return error ? console.log(error) : fileData(data);
+      }
+    );
+    //parses fileData
+    data = JSON.parse(data);
+    //sets new data to the array value of file data
+    const singleID = data.pop();
+    //writes over data with new data
+    data = JSON.stringify(data);
+    fs.writeFile(
+      path.join(__dirname, "/data/codeWarsIDs.json"),
+      data,
+      function (err) {
+        if (err) throw err;
+        console.log("Saved!");
+      }
+    );
+    console.log(singleID);
+    return singleID;
+  } catch (error) {
+    console.log(error);
+    return;
+  }
 };
 
 const getOneID = async () => {
