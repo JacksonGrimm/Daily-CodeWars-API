@@ -17,15 +17,15 @@ const checkNewDay = async function (req, res, next) {
   next();
 };
 //check if its a new month
-const newMonth = function (req, res, next) {
-  let newDate = new Date();
-  newDate = newDate.getDate();
-  if (newDate === 28 || lastDate === "") {
-    console.log("get new ids");
-    startScrape();
-  }
-  next();
-};
+// const newMonth = function (req, res, next) {
+//   let newDate = new Date();
+//   newDate = newDate.getDate();
+//   if (newDate === 28 || lastDate === "") {
+//     console.log("get new ids");
+//     startScrape();
+//   }
+//   next();
+// };
 
 const PORT = process.env.PORT || 3001;
 const app = express();

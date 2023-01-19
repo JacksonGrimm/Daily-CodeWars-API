@@ -59,9 +59,11 @@ const startScrape = async () => {
       console.log("Saved!");
     }
   );
-  ids = await scrapeCodeWars();
-  console.log(ids);
-  storeID(ids);
+  for (let i = 0; 14 > i; i++) {
+    ids = await scrapeCodeWars();
+    console.log(ids);
+    storeID(ids);
+  }
 };
 
 const removeID = async () => {
