@@ -6,7 +6,7 @@ const path = require("path");
 const scrapeCodeWars = async () => {
   try {
     const response = await axios.get(
-      "https://www.codewars.com/kata/search/?q=&order_by=sort_date+desc&sample=true"
+      "https://www.codewars.com/kata/search/javascript?q=&beta=false&order_by=sort_date+desc&sample=true"
     );
     const html = response.data;
     const $ = cheerio.load(html);

@@ -22,6 +22,8 @@ router.get("/getDailyChallenge", async (req, res) => {
 
 router.get(`/getDailyChallenge/${process.env.PASS}`, async (req, res) => {
   await startScrape();
+  res.send("got the IDs dog!");
+  res.status(200);
 });
 
 module.exports = router;

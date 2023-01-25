@@ -8,26 +8,24 @@ const cors = require("cors");
 const { nextTick } = require("process");
 // const aws = require("./utils/aws");
 // check new day
+
+let pastDay = "";
 const checkNewDay = async function (req, res, next) {
-  try {
-    let newDate = new Date();
-    newDate = newDate.getDate();
-    if (newDate !== lastDate || lastDate === "") {
-      lastDate = newDate;
-      console.log("its a new day!!!");
-      await removeID();
-    }
-    next();
-  } catch (error) {
-    console.log(error);
-    return;
+  let newDate = new Date();
+  newDate = newDate.getDate();
+  console.log(newDate, pastDay);
+  if (newDate !== pastDay) {
+    //get the new Index
+    console.log("its a new Day!");
+    pastDay = newDate;
+    await removeID();
   }
+  next();
 };
 
 const PORT = process.env.PORT || 3001;
 const app = express();
 
-let lastDate = "";
 // app.use(newMonth);
 app.use(checkNewDay);
 app.use(express.urlencoded({ extended: false }));
