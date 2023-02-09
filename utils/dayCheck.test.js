@@ -7,7 +7,6 @@ test("check if a new day it recognized on start", async () => {
 
 test("check if a new day it recognizes a change in the day", async () => {
   dateCheck = new DateCheck();
-  console.log(dateCheck.currentDate);
   expect(await dateCheck.checkNewDay()).toBe(true);
   dateCheck.currentDate = 10;
   expect(await dateCheck.checkNewDay()).toBe(true);

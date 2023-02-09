@@ -4,17 +4,17 @@ const routes = require("./routes");
 const { startScrape, removeID } = require("./utils/webScrapper");
 const dotenv = require("dotenv");
 const cors = require("cors");
-
 const { nextTick } = require("process");
-// const aws = require("./utils/aws");
-// check new day
-
+const DateCheck = require("./utils/dayCheck");
 const PORT = process.env.PORT || 3001;
 const app = express();
+
+const dateCheck = new DateCheck();
 
 // app.use(newMonth);
 app.use((req, res, next) => {
   //check the date method
+  dateCheck.checkNewDay();
   next();
 });
 app.use(express.urlencoded({ extended: false }));
