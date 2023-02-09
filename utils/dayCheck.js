@@ -16,7 +16,7 @@ class DateCheck {
       console.log("its a new day");
       this.currentDate = newDate;
       //   await removeID();
-      return "its a new day";
+      return true;
     }
     return "nothin new";
   }
@@ -26,3 +26,5 @@ const dateCheck = new DateCheck();
 
 dateCheck.checkNewDay();
 dateCheck.checkNewDay();
+
+module.exports = DateCheck;
