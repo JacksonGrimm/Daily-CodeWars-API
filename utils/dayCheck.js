@@ -1,7 +1,7 @@
 class DateCheck {
   constructor() {
     this.currentDate = "";
-    this.newDate = false;
+    this.newMonth = true;
   }
   async checkNewDay() {
     let newDate = new Date();
