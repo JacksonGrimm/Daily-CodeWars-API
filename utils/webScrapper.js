@@ -19,10 +19,11 @@ class ScrapeCodeWars {
       return response;
     } catch (error) {
       console.error(error);
+      throw error;
     }
   };
 
-  handleResponse = (response) => {
+  getResponseIds = (response) => {
     const $ = cheerio.load(response.data);
     let ids = [];
     $(".list-item-kata").each((id, el) => ids.push($(el).attr("id")));
@@ -35,7 +36,7 @@ class ScrapeCodeWars {
 
   startScrape = async () => {
     const codeWarsResponse = await this.queryCodeWars();
-    const codeWarsIds = this.handleResponse(codeWarsResponse);
+    const codeWarsIds = this.getResponseIds(codeWarsResponse);
     this.storeIds(codeWarsIds);
   };
 
@@ -48,19 +49,13 @@ class ScrapeCodeWars {
     if (this.isNewDay()) {
       this.date = new Date();
       this.currentId = undefined;
-      this.getId();
+      return this.getId();
     }
 
     if (!this.currentId) {
       const id = this.ids.pop();
       this.currentId = id;
-      this.storeIds(
-        this.ids.filter((el) => {
-          if (el !== id) {
-            return id;
-          }
-        })
-      );
+      this.storeIds(this.ids.filter((el) => el !== id));
     }
 
     return this.currentId;
