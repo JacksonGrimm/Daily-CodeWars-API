@@ -1,7 +1,9 @@
 # Daily CodeWars Challenge API
 
-This is a API that gives you a daily codewars challenge using v1 Codewars API 
+This API employs a web scraper on the https://www.codewars.com/ website to deliver a daily CodeWars challenge. The output is formatted as a JSON object, as illustrated below:
 
+Feel free to use this API to incorporate CodeWars challenges into your daily routine!
+ 
 ## Link
   ```curl
     https://codewarsapi.herokuapp.com/api/getDailyChallenge/
@@ -37,10 +39,6 @@ This is a API that gives you a daily codewars challenge using v1 Codewars API
   },
 }
 ```
-
-## Contributing
-
-Please feel free to create an issue if you me to add a feature.
 
 ## License
 
