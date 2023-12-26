@@ -1,28 +1,29 @@
 const router = require("express").Router();
 const axios = require("axios");
-const { getOneID, startScrape } = require("../utils/webScrapper");
+
+const { ScrapeJsCodeWars } = require("../utils/webScrapper");
+
 const dotenv = require("dotenv");
 dotenv.config();
 
 router.get("/getDailyChallenge", async (req, res) => {
-  const getFromCodeWars = async (ID) => {
-    try {
-      const data = await axios.get(
-        `https://www.codewars.com/api/v1/code-challenges/${ID}`
-      );
-      res.send(data.data);
-    } catch (error) {
-      console.log(ID);
-      console.log(error);
-    }
-  };
-  ID = await getOneID();
-  getFromCodeWars(ID);
+  try {
+    const id = await ScrapeJsCodeWars.getId();
+    const response = await axios.get(
+      `https://www.codewars.com/api/v1/code-challenges/${id}`
+    );
+    console.log(`QUERY SUCCESSFUL: ${JSON.stringify(req.headers)} \n`);
+    res.json(response.data);
+  } catch (error) {
+    console.error(error);
+  }
 });
 
-router.get(`/getDailyChallenge/${process.env.PASS}`, async (req, res) => {
-  await startScrape();
-  res.send("got the IDs dog!");
+router.get(`/getDailyChallenge/${process.env.API_KEY}`, async (req, res) => {
+  await ScrapeJsCodeWars.startScrape();
+  console.log(await ScrapeJsCodeWars.getId());
+
+  res.send("getting Ids...");
   res.status(200);
 });
 
